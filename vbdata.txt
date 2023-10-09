@@ -1,0 +1,64 @@
+Imports Microsoft.VisualBasic
+Imports System.Data
+Imports System.Data.OleDb
+
+Public Class Class1
+    Dim cn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='C:\Users\CodeDesk\Documents\Database1.accdb'")
+    Dim cm As OleDbCommand
+    Dim da As OleDbDataAdapter
+    Dim ds As New DataSet
+
+    Public Sub IUD(ByVal str As String)
+        If cn.State = ConnectionState.Closed Then
+            cn.Open()
+        End If
+        cm = New OleDbCommand(str, cn)
+        cm.ExecuteNonQuery()
+        cn.Close()
+    End Sub
+
+    Public Function Display(ByVal str As String) As DataSet
+        da = New OleDbDataAdapter(str, cn)
+        ds.Tables.Clear()
+        da.Fill(ds)
+        Return ds
+    End Function
+End Class
+
+
+Public Class WebForm1
+    Inherits System.Web.UI.Page
+    Dim ds As New DataSet
+    Dim s1 As New Class1
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Data()
+    End Sub
+
+    Public Sub Data()
+        ds = s1.Display("select * from student")
+        GridView1.DataSource = ds.Tables(0)
+        GridView1.DataBind()
+    End Sub
+
+    Protected Sub btnInsert_Click(sender As Object, e As EventArgs) Handles btnInsert.Click
+        Dim str As String = ""
+        If (CheckBoxList1.Items(0).Selected) Then
+            str += CheckBoxList1.Items(0).Value + ", "
+        End If
+        If (CheckBoxList1.Items(1).Selected) Then
+            str += CheckBoxList1.Items(1).Value + ", "
+        End If
+        If (CheckBoxList1.Items(2).Selected) Then
+            str += CheckBoxList1.Items(2).Value + ", "
+        End If
+        If (CheckBoxList1.Items(3).Selected) Then
+            str += CheckBoxList1.Items(3).Value + ", "
+        End If
+        s1.IUD("insert into student values(" & bxId.Text & ",'" & bxName.Text & "','" & RadioButtonList1.SelectedValue & "'," & bxPhno.Text & ",'" & str & "')")
+        Data()
+    End Sub
+
+    Protected Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        Response.Redirect("WebForm2.aspx")
+    End Sub
+End Class

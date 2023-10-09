@@ -1,0 +1,465 @@
+﻿ROLL NO :160
+NAME : RIDDHI LIMBASIYA A.
+CLASS : TYBCA DIV 1
+SUBJECT :PRACTICAL (UNIX AND SHELL PROGRAMMING)
+
+=============Practical Assignment : 1==================
+
+1] To display detail list of top 6 largest files in a working directory.
+   
+    Answer : $ ls -S | head -6
+
+2] Transfer recursively the ownership of all files in current directory 'bca5'.
+
+    Answer : $ chown -R riddhi bca5
+
+3] Copy all 6 character file in working directory to dir1 .
+
+    Answer :$ cp ../?????? /  
+		or 
+	$ cp file[1-6] dir1
+    
+4] To display inode number of all files of current directory.
+
+    Answer : $ ls -i
+
+5] To print first three columns and first two rows of file emp.lst.
+
+    Answer : $ cut -d" " -f1,2,3 emp.lst | head -2
+
+6] To delete all lines but not the last line of file demo1.
+
+    Answer : $ echo `tail -n 1 demo1` > demo1
+
+
+7] To extract first word of each line of file demo1.
+
+    Answer : $ cut -c-1 demo1
+
+8] To display total number of words and lines of files for which file name start with 'm'.
+
+    Answer : $ wc m*
+
+9]. To display line number before each line in file demo1.
+
+    Answer : $ cat -n demo1
+
+10]. Write a command to remove directory tree dir1/dir2/dir3 using single command.
+
+    Answer : $ rmdir -p dir1/dir2/dir3
+
+11]. To convert decimal number 192 to hexadecimal.
+    Answer :
+    $bc
+    ibase = 10
+    obase =16
+    192
+    C0
+
+12]. To give read and write permission to f1.
+
+    Answer :  $ chmod a+rw f1
+		or 
+                    $ chmod 666 f1 
+
+13]. Forcefully delete each file from directory tybca/mywork.
+
+    Answer : $ rm -f tybca/mywork/*
+
+14]. Sort filename by last access time from dir1
+
+    Answer : $ ls -u dir1
+
+15]. Rename file chap1 to unit1.
+
+    Answer : $ mv chap1 unit1
+
+16]. Find out number of lines of file chap01.
+
+    Answer : $ wc -l chap01
+
+17]. Find out i-node number of file chap01.
+
+    Answer : $ ls -i chap01
+
+18]. Write a command to sort a line of file and also remove repeated line.
+
+    Answer : $ sort -u file1
+		or
+	 $sort file1 | uniq -u 
+
+19]. Write a command to print first three line of file emp.lst.
+
+    Answer : $ head -3 emp.lst
+
+20]. To print Unique line of file Tybca
+
+    Answer : $ uniq -u Tybca 
+
+21]. Sort a file and print Frequency of each line from file Tybca.
+
+    Answer : $ sort Tybca | uniq -c
+
+22]. Count number of characters in first five lines of file x1.
+
+    Answer : $ head -5 x1 | wc -c
+
+23]. Display lines starting from 5th lines of file emp.lst.
+
+    Answer : $ tail +5 emp.lst
+
+24]. To remove a filename as x1 ?(x1 followed by ? character).
+
+    Answer : rm x1?
+
+25]. To Display last line of file x1.
+
+    Answer : $ tail -1 x1
+
+26]. To deny execute permission to a group of file x1.
+
+    Answer : $ chmod g-x x1
+
+27]. To count number of characters of last line from the file emp.lst.
+
+    Answer : $ tail -1 emp.lst | wc -m
+
+28]. To count number of words in line 4 to 6 from the file f1.txt .
+
+    Answer : $ head -n 6 f1 | tail -n +4 | wc -m
+
+
+=============Practical Assignment : 2==================
+
+*1]. Write a script to perform Mathematical Operations Using Menu. Number may be integer or
+float.
+1) Addition
+2) Subtraction
+3) Multiplication
+4) Division
+Answer:
+echo "Mathematical Operations Menu ==>" 
+read -p "Enter the first number: " a 
+read -p "Enter the second number: " b
+echo -e "1) Addition\n2) Subtraction\n3) Multiplication\n4) Division" 
+echo "Enter your choice:"
+read ch
+case $ch in
+    1)echo "Addition is: `expr $a + $b`" ;; 
+
+    2)echo "Substraction is: `expr $a - $b` " ;; 
+     
+    3)echo "Multiplication is: `expr $a \* $b`" ;; 
+    
+    4)echo "Division is: `expr $a / $b`" ;; 
+    
+   *)echo "Invalid choice" ;; 
+esac 
+
+2] An integer or a floating-point number should be accepted from user. Write a menu-driven script 
+for the following options.
+(i) Convert decimal to binary number
+(ii) Convert decimal to octal number
+(iii) Convert decimal to hexadecimal number. 
+Proper validation must be expected
+
+Answer:
+echo "Number Conversion Menu ==>" 
+echo "Enter an integer or floating-point number: "
+read n
+echo "Conversion Options:"
+echo "1]for Decimal to Binary"
+echo "2]for Decimal to Octal"
+echo "3]for Decimal to Hexadecimal"
+read ch
+case "$ch" in
+1) echo "ibase=10;obase=2;$n"| bc ;;
+2)echo "ibase=10;obase=8;$n"| bc ;;
+3) echo "ibase=10;obase=16;$n"| bc ;;
+*)echo "Invalid choice"
+esac
+
+3] Write a script to check whether the inputted number is Armstrong or not.
+Answer:
+echo " Armstrong number Program==> " 
+echo "Enter a number: " 
+read number
+original=$number
+num_digits=${number}
+sum=0
+
+while ((number > 0)); do
+    digit=$((number % 10))
+    sum=$((sum + digit**num_digits))
+    number=$((number / 10))
+done
+
+if ((sum == original)); then
+    echo "$original is an Armstrong number."
+else
+    echo "$original is not an Armstrong number."
+fi
+4] Write a script to enter 5 subjects mark from command line and display percentage and appropriate class.
+Answer:
+echo "Enter marks for 5 Subject : " 
+read s1 s2 s3 s4 s5
+mark=$((s1 + s2 + s3 + s4 + s5))
+per=$((mark / 5))
+if (($per >= 90)); then
+    class="First class"
+elif (($per >= 80)); then
+    class="Second class"
+elif (($per >= 70)); then
+    class="Third class"
+elif (($per >= 60)); then
+    class="Make try"
+else
+    class="Fail"
+fi
+
+echo "Total Marks: $mark"
+echo "Percentage: $per%"
+echo "Class: $class"
+
+5] Write a script to check entered character is uppercase, lowercase, numeric, digit or special character.
+Answer:
+
+read -p "Enter a character: " char 
+case $char in 
+        [A-Z]) echo "Uppercase character";;
+        [a-z]) echo "Lowercase character";;
+        [0-9]) echo "Numeric character";;
+        [[:digit:]]) echo "you enter digit";;
+        *) echo "you enter special character";;
+esac
+6] Write a script that receive string and check both are same or different. Also check the length of both string are greater than 0.
+Answer:
+
+read -p "Enter your First String :" s1
+read -p "Enter your Second String :" s2
+if  [[ -z  "$s1" || -z  "$s2" ]]; then
+	echo "Both Strings must have nono-zero length "
+elif [[ "$s1" == "$s2" ]]; then
+	echo "Both Strings  are same"
+else
+	echo "Both Strings  are different"
+fi
+
+7] Write a shell script to check whether entered number is palindrome or not.
+Answer:
+echo "Enter a number:"
+read a
+b=$(echo $a |rev)
+if [ $a -eq $b ]
+then
+echo "Number is palindrom"
+else
+echo "Number is not palindrom"
+fi
+
+8] Write a shell script to reverse a number.
+Answer:
+echo "Reverse number Program==>"
+echo "Enter a number:"
+read a
+b=$(echo $a |rev)
+echo "Reverse number is :"$b
+
+9] Write a shell script which displays list of all files in current directory to which you have read write and execute permissions.
+Answer:
+ echo "File with read write and execute persmission"
+    for file in  
+    do
+        if [ -f "$file" ] &&  [ -r "$file" ] && [ -w "$file" ] && [ -x "$file" ]
+        then
+            echo $file
+        fi
+   done
+
+10] Write a shell Script That Accept two Decimal Numbers from Keyboard and Display Their Sum in
+Hexadecimal Form.
+Answer:
+
+read -p "Enter first decimal number: " num1
+read -p "Enter second decimal number: " num2                          
+
+sum=$(echo "$num1 + $num2" | bc)
+hex_sum=$(echo "obase=16; $sum" | bc)
+echo "Sum in hexadecimal form $hex_sum"
+
+11] Write a shell script to validate the name of a person Accepted through the keyboard so that it does not exceed 10 char of length.
+Answer:
+
+read -p "Enter person's name:" name 
+if [ ${#name} -gt 10 ]
+then 
+	echo "***Name should not exceed 10 characters"
+else
+    	echo "This Name is valid $name"
+fi
+
+
+12] Write a shell script to test the file is an executable file or not.
+Answer:
+
+read -p "enter file name :" filename
+    if [ -x $filename ]
+    then
+        echo "$filename is executable file"
+    else
+        echo "$filename is not executeble file"
+    fi
+
+13] Write a shell script to find smallest of three numbers that are read from keyword.
+Answer:
+
+echo "find smallest of three numbers"
+read -p "Enter three number: " a b c
+if [ $a -lt $b ] && [ $a -lt $c ]
+then
+	echo "$a is smallest"
+elif [ $b -lt $a ] && [ $b -lt $c ]
+then
+	echo "$b is smallest"
+else
+	echo "$c is smallest"
+fi
+
+14] Write a script that accept one or more filename from command line and display number of words in each file
+Answer: 
+file1=$1
+file2=$2
+wc -w $file1
+wc -w $file2
+
+15] Write a shell script to test that the file is a readable file or not.
+Answer:
+
+read -p "Enter name of file :" filename
+if [ -r "$filename" ]
+then
+	echo "$filename file is Readable"
+else
+	echo "$filename file is not Readable"
+fi
+
+16] Write a shell script to check whether entered file is exist or not.
+Answer:
+
+read -p "Enter name of file :" filename
+if [ -e "$filename" ]
+then
+	echo "$filename file is Exist"
+else
+	echo "$filename file is not Exist"
+fi
+
+17] Write a shell script to check whether the given file is empty or not.
+Answer:
+
+read -p "Enter name of file :" filename
+if [ -s "$filename" ]
+then
+	echo "$filename file is not Empty"
+else
+	echo "$filename file is Empty"
+fi
+
+18] Write a script to count a file, directory, symbolic link file from current directory.
+Answer:
+
+count_file=0
+count_dir=0
+count_slink=0
+other=0
+for i in *
+do
+if  [ -f  "$i" ]
+then
+	count_file=$((count_file+1))
+elif  [ -d  "$i" ]
+then
+	count_dir=$((count_dir+1))
+elif  [ -L  "$i" ]
+then
+	count_slink=$((count_slink+1))
+else
+	other=$((other+1))
+fi
+done
+
+echo "Number of regular files : $count_file"
+echo "Number of directories : $count_dir"
+echo "Number of symbolic link files : $count_slink"
+echo "Other files : $other"
+
+=============Practical Assignment : 3==================
+
+Answer the following using grep and sed
+
+1] Display all files in current directory where the first character is numeric and the last character is not alphabetic.
+ Answer :  ls |grep '^[0-9].*[^a-zA-Z]$' 
+
+2] To count number of words in line 40 thought 60 of file stud.txt.
+ Answer : sed -n '40,60 p' stud.txt | wc -w
+
+3] To list file names consist of only 4 digits.
+ Answer : ls | grep  '^[0-9]\{4\}$'
+
+4] To display lines beginning with alphabets of a file x1.
+ Answer : grep '^[a-zA-Z]' x1
+
+5] Display all blank lines between line 20 and 30 of file XI.
+ Answer : grep'^$' X1|sed'20,30p
+
+6] Display lines beginning either with alphabet or digit from file X1.
+ Answer :  grep '^[a-zA-Z0-9].*$'X1
+
+7] Display the lines that do not contain "Unix"
+ Answer :  grep -v 'Unix' X1
+
+8] Display the number of occurrence of the pattern 'director'.
+ Answer : grep -c 'director'X1
+
+9] Display lines having exactly 10 character of file X1.
+ Answer :  grep '^\{10\}$' X1
+
+10] Write command to append a dashed line after each line of file X1
+ Answer :  $ sed 'a\
+           >- - - - 
+           >'x1
+
+11] Replace 'kernel' with 'kernel architecture' using remember pattern of sed utility.
+ Answer : sed '/kernal/s/kernal architecture/g' X1
+
+12] Replace the word unix with UNIX in whole file.
+ Answer :  sed'/unix/s/UNIX/g' X1
+
+13] Display lines 10 to 15 from files f1.txt.
+ Answer : sed -n '10,15p' f1.txt
+
+ 14] To count number of words in line 10 to 20 of file f1.txt.
+ Answer : sed -n '10,20p' f1.txt | wc -w
+
+15] Write a command to replace first occurrences of ‘Delhi’ with ‘Mumbai’ in each line of dept.lst file.
+ Answer :  sed ' s/delhi/mumbai/' dept.lst
+
+16] Display all files which have read and write permission for the group.
+ Answer : ls -l | grep '....rw-...'
+
+17] Find out the number of the character ‘?’ occur in a file f1.txt
+ Answer : grep ' \?'  f1.txt | wc -c
+
+18] To delete all vowels from the file x1.txt.
+ Answer :   sed 's/[aeiouAEIOU]//g' x1.txt 
+
+19] Replace the word ‘unix’ with ‘UNIX’ in between 5th to 10th line 
+ Answer :   sed ' 5,10/unix/UNIX/' file1
+
+
+
+
+
+
+
+
